@@ -61,7 +61,6 @@ kotlin {
         else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
     }
 
-
     sourceSets {
         val commonMain by getting
         val commonTest by getting {
@@ -99,7 +98,7 @@ afterEvaluate {
             pom {
                 name.set("Kotlinx Newsboat Parser")
                 description.set("Kotlin parser for newsboat configuration and url file format")
-                url.set("https://github.com/esensar/kotlinx-newsboat-parser")
+                url.set("https://github.com/esensar/kotlin-newsboat-parser")
                 licenses {
                     license {
                         name.set("MIT License")
@@ -115,9 +114,9 @@ afterEvaluate {
                     }
                 }
                 scm {
-                    url.set("https://github.com/esensar/kotlinx-newsboat-parser")
-                    connection.set("scm:git:https://github.com/esensar/kotlinx-newsboat-parser.git")
-                    developerConnection.set("scm:git:git@github.com:esensar/kotlinx-newsboat-parser.git")
+                    url.set("https://github.com/esensar/kotlin-newsboat-parser")
+                    connection.set("scm:git:https://github.com/esensar/kotlin-newsboat-parser.git")
+                    developerConnection.set("scm:git:git@github.com:esensar/kotlin-newsboat-parser.git")
                 }
             }
         }
@@ -141,7 +140,7 @@ afterEvaluate {
 
             maven {
                 name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/esensar/kotlinx-newsboat-parser")
+                url = uri("https://maven.pkg.github.com/esensar/kotlin-newsboat-parser")
                 credentials {
                     username = System.getenv("GITHUB_ACTOR")
                     password = System.getenv("GITHUB_TOKEN")
