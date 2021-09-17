@@ -1,4 +1,3 @@
 package com.ensarsarajcic.kotlinx.newsboatparser
 
-object NewsboatParser {
-}
+object NewsboatParser
