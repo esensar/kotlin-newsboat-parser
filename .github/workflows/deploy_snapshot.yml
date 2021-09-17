@@ -1,0 +1,28 @@
+name: Deploy to GitHub packages and Sonatype Snapshots
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests with Gradle
+        run: ./gradlew allTests
+      - name: Generate dokka HTML
+        run: ./gradlew dokkaHtml
+      - name: Deploy snapshot to Sonatype Snapshots
+        run: ./gradlew -Psnapshot=true publishAllPublicationsToSnapshotRepository
+        env:
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+      - name: Deploy snapshot to GitHub packages
+        run: ./gradlew -Psnapshot=true publishAllPublicationsToGitHubPackagesRepository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
