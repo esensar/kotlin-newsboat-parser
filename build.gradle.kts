@@ -80,7 +80,6 @@ subprojects {
                         connection.set("scm:git:https://github.com/esensar/kotlin-newsboat-parser.git")
                         developerConnection.set("scm:git:git@github.com:esensar/kotlin-newsboat-parser.git")
                     }
-
                 }
             }
             repositories {

@@ -52,3 +52,5 @@ kotlin {
         val nativeTest by getting
     }
 }
+
+tasks.register<com.ensarsarajcic.kotlinx.newsboatparser.generator.GenerateNewsboatConfigTask>("generateNewsboatConfigParser")
