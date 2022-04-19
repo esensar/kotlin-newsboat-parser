@@ -38,15 +38,29 @@ abstract class BaseGenerateConfigTask : DefaultTask() {
         val config = downloadTextFromUrl(commandsUrl)
 
         val defs = config.lines().filter { it.isNotBlank() }.map {
-            val cols = it.split("||")
-            ConfigCommandDefinition(
-                cols[0],
-                parseParams(cols[1]),
-                parseDefault(cols[2]),
-                cols[3],
-                cols[4]
-            )
+            lineParser()(it)
         }
+    }
+
+    fun separatorParser() = sequenceParser(charParser('|'), charParser('|'))
+
+    fun argsParser() = charParser()
+
+    fun lineParser(): Parser<ConfigCommandDefinition> = mapperParser(sequenceParser(
+        identifierParser(),
+        separatorParser(),
+        argsParser(),
+        separatorParser(),
+        charParser(),
+        separatorParser()
+    )) {
+        ConfigCommandDefinition(
+            it[0] as String,
+            it[2] as List<Parameter>,
+            it[4] as String,
+            it[6] as String,
+            it[8] as String
+        )
     }
 
     private fun parseParameter(parameter: String): Parameter {
